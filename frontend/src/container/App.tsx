@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.css";
 import HomeContextContainer from "context-api/HomeContextContainer";
 import ProgressSteps from "components/Progresssteps";
 
-function App() {
+const App = (): JSX.Element => {
   return (
     <div className="App">
       <HomeContextContainer>
@@ -11,6 +10,6 @@ function App() {
       </HomeContextContainer>
     </div>
   );
-}
+};
 
 export default App;
