@@ -44,5 +44,5 @@ npm start
 
 * [Django Rest Framework](https://www.django-rest-framework.org/tutorial/quickstart/) - The backend framework used
 * [React Typescript](https://create-react-app.dev/docs/adding-typescript/) - The frontend framework used
-* [MySql](https://www.mysql.com/) - Database platform used
+<!-- * [MySql](https://www.mysql.com/) - Database platform used -->
 
