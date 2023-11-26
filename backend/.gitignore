@@ -1,0 +1,14 @@
+env/
+.vscode/
+__pycache__/
+.env
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+db.sqlite3
+media
+static/ckeditor/
+digb_api/__pycache__/*
+digb_core/__pycache__/*
+stderr.log
+digb_core/settings.py
