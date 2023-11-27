@@ -41,7 +41,7 @@ const Input: FC<InputProps> = (props) => {
                 <div className="position-relative cursor-pointer mt-2">
                   <Form.Control
                     onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      onImageChange(e)
+                      onImageChange && onImageChange(e)
                     }
                     type="file"
                     name={name}
@@ -87,7 +87,7 @@ const Input: FC<InputProps> = (props) => {
               <>
                 <Form.Label className="w-100">{label}</Form.Label>
                 <div className="form-control p-0 overflow-hidden">
-                  <textarea id="inputText" onChange={onChange}>
+                  <textarea id="inputText" onChange={onChange} name={name}>
                     {value}
                   </textarea>
                 </div>

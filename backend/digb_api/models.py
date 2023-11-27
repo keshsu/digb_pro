@@ -14,9 +14,9 @@ class TimeStampMixin(models.Model):
 class Tax(TimeStampMixin):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name="auth_token",
         on_delete=models.CASCADE,
-        verbose_name="User",
+        related_name="enrolled_user",
+        default=1
     )
     tax_return = models.BooleanField(default=False)
     tax_review = models.TextField(null=True)

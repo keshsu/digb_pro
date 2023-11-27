@@ -13,16 +13,21 @@ import Alert from "components/Alert/Alert";
 
 import { alertService } from "services/alertService";
 import { authService } from "services/authService";
+import { ROUTES } from "constants/routes";
+import { useLocation } from "react-router-dom";
 
 const Signin = () => {
+  const location = useLocation();
   const [inputs, setInputs] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const { email, password } = inputs;
+  const { username, password } = inputs;
+
+  const { from } = location.state || { from: ROUTES.Index.path };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -36,7 +41,7 @@ const Signin = () => {
     setSubmitted(true);
 
     authService
-      .login(email, password)
+      .login(username, password)
       .then((user: any) => {
         if (user.key) {
           localStorage.clear();
@@ -45,6 +50,7 @@ const Signin = () => {
             keepAfterRouteChange: true,
             autoClose: true,
           });
+          window.location.href = from;
         } else {
           // setInputs("");
           localStorage.clear();
@@ -82,25 +88,25 @@ const Signin = () => {
                   <h3>Digb Taxation Process</h3>
                 </div>
                 <Form className="mt-4" onSubmit={handleSubmit}>
-                  <Form.Group id="email" className="mb-4">
-                    <Form.Label>Your Email</Form.Label>
+                  <Form.Group id="username" className="mb-4">
+                    <Form.Label>Username</Form.Label>
                     <InputGroup>
                       <Form.Control
                         required
-                        type="email"
-                        name="email"
+                        type="text"
+                        name="username"
                         onChange={handleChange}
-                        placeholder="someone@example.com"
+                        placeholder="username"
                       />
                     </InputGroup>
-                    {submitted && !email && (
+                    {submitted && !username && (
                       <div className="invalid-feedback">
                         Email Address is required
                       </div>
                     )}
                   </Form.Group>
                   <Form.Group id="password" className="mb-4">
-                    <Form.Label>Your Password</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <InputGroup>
                       <Form.Control
                         required

@@ -4,7 +4,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import Input from "../input/Input";
 
 interface Step5Props {
-  setStep: (step: number) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
   methods: {
     trigger: () => Promise<boolean>;
     formState: {

@@ -1,0 +1,285 @@
+/*
+ * Sidebar
+*/
+.sidebar-nav {
+  background-color: $background-color;
+
+  .navbar-toggler {
+    border: 0;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.sidebar {
+  display: block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  // z-index: 100;
+  max-height: 100%;
+  overflow-y: auto;
+  width: 100%;
+  background-color: $background-color;
+  border-right: 1px solid rgba($color: $white, $alpha: 0.1);
+  margin: 0;
+  @include transition(max-width 0.3s);
+
+  @include media-breakpoint-up(md) {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 77px;
+  }
+
+  .nav {
+    white-space: nowrap;
+  }
+
+  .nav-item {
+    @extend .position-relative;
+    &.active {
+      & > .nav-link {
+        color: $primary-color;
+
+        svg {
+          fill: $primary-color;
+        }
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 30px;
+        border-radius: 5px;
+        top: 0;
+        left: 0;
+        transform: translate(-30px, 5px);
+        background: $primary-color;
+      }
+    }
+    .nav-link {
+      color: $light;
+      letter-spacing: normal;
+      text-align: left;
+      line-height: 1.5;
+      text-transform: none;
+
+      &:hover {
+        color: $primary-color;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+
+      &.active {
+        color: $white;
+      }
+    }
+    margin-bottom: 0.2rem;
+  }
+
+  .nav-link + .multi-level {
+    margin-top: 0.2rem;
+  }
+
+  .nav-link {
+    font-size: $font-size-base;
+    vertical-align: middle;
+    padding: 0.55rem 0.75rem;
+
+    .sidebar-icon {
+      margin-right: 0.5rem;
+      span {
+        min-width: 22px;
+      }
+      svg {
+        min-width: 22px;
+      }
+      &.svg-icon {
+        margin-right: 14px;
+      }
+    }
+
+    .link-arrow {
+      font-size: $font-size-sm;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.1rem rgba(#4c5680, 0.2);
+    }
+  }
+
+  .nav-link.active {
+    color: $primary;
+  }
+  .sidebar-avatar {
+    width: 50%;
+    height: auto;
+
+    &.top-nav-logo {
+      margin: 40px 0;
+    }
+  }
+
+  .multi-level {
+    .nav-link {
+      padding-left: 45px;
+    }
+  }
+
+  .mainmenu-label {
+    color: $light1;
+  }
+
+  .sidebar-text,
+  .link-arrow,
+  .badge,
+  .notification-count {
+    opacity: 1;
+    @include transition(opacity 0.3s);
+    white-space: break-spaces;
+  }
+
+  @include media-breakpoint-up(md) {
+    .sidebar-text-contracted {
+      display: none;
+      @include transition(opacity 0.3s);
+    }
+
+    &.contracted {
+      .sidebar-text,
+      .link-arrow,
+      .badge {
+        opacity: 0;
+      }
+
+      .notification-count {
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 35px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        font-size: 0.7rem;
+        padding: 0.2rem;
+      }
+
+      .nav-item {
+        position: relative;
+        width: 47px;
+        &.active {
+          & > .nav-link {
+            color: $primary;
+          }
+        }
+        .nav-link {
+          &:hover {
+            color: $primary;
+          }
+        }
+      }
+
+      .sidebar-text-contracted {
+        display: inline;
+      }
+
+      .multi-level .nav-link {
+        padding-left: 17px;
+      }
+
+      .nav-item {
+        white-space: nowrap;
+      }
+
+      .sidebar-icon {
+        text-align: center;
+      }
+
+      @include media-breakpoint-up(md) {
+        & + .content-wrapper {
+          margin-left: 95px;
+        }
+      }
+
+      max-width: 95px;
+    }
+  }
+}
+
+.sidebar-inner {
+  position: relative;
+  overflow-y: hidden;
+
+  .accordion-item {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .accordion-button {
+    background-color: transparent;
+
+    &::after {
+      content: "\f105";
+      color: white;
+      background-image: none;
+      font-family: $font-awesome-5;
+      font-size: $font-size-sm;
+      font-weight: 900;
+      height: 1.25rem;
+      width: 0.5rem;
+    }
+
+    &:not(.collapsed) {
+      &::after {
+        transform: rotate(90deg);
+        transition: all 0.2s ease;
+      }
+    }
+  }
+
+  .accordion {
+    padding-top: 0.25rem;
+
+    .accordion-item {
+      background-color: transparent;
+    }
+  }
+
+  .accordion-body {
+    padding: 0.5rem 0 0 0;
+  }
+
+  .accordion-collapse {
+    border: 0;
+  }
+}
+
+.sidebar-heading {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.user-card {
+  border-bottom: 0.0625rem solid #2e3650;
+}
+
+.content-wrapper {
+  overflow-y: auto;
+  margin: auto;
+  height: calc(100vh - 86px);
+  padding: 2em;
+  @include transition(all 0.3s);
+  
+  @include media-breakpoint-up(md) {
+    height: calc(100vh - 77px);
+    margin-left: 320px;
+  }
+}

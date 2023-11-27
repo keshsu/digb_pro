@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { UserContextProvider } from "./UserContext";
+import { AuthProvider } from "./AuthContext";
 
 const HomeContextContainer = ({ children }: { children: ReactNode }) => (
-  <UserContextProvider>{children}</UserContextProvider>
+  <AuthProvider>{children}</AuthProvider>
 );
 
 export default HomeContextContainer;

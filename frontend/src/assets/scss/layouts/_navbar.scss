@@ -1,0 +1,57 @@
+/**
+ * = Navigation bars
+ */
+.top-nav {
+  border-bottom: 1px solid rgba($color: $white, $alpha: 0.1);
+}
+.user-avatar {
+  @include size(2em);
+
+  object-fit: contain;
+  object-position: center;
+  overflow: hidden;
+
+  &.md-avatar {
+    @include size(3em);
+  }
+  &.lg-avatar {
+    @include size(4em);
+    object-fit: cover;
+  }
+}
+
+.navbar .navbar-nav {
+  .nav-link {
+    @include transitions(0.8s, $transition-base);
+    white-space: normal;
+
+    @include media-breakpoint-down(md) {
+      font-size: 1.2rem;
+      @include display-flex();
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+  }
+  .dropdown-menu {
+    @extend .w-100;
+    border-radius: 0;
+  }
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.navbar-brand {
+  .brand-text {
+    font-size: 1.2rem;
+    font-weight: $font-weight-bold;
+    color: $secondary;
+  }
+
+  img {
+    @include size(3em);
+    object-fit: contain;
+    object-position: center;
+  }
+}

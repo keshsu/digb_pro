@@ -4,7 +4,7 @@ import { Button, Col, Image, Row } from "react-bootstrap";
 import Input from "../input/Input";
 
 interface Step1Props {
-  setStep: (step: number) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
   methods: {
     trigger: () => Promise<boolean>;
     setValue: (name: string, value: any) => void;
@@ -16,7 +16,6 @@ interface Step1Props {
 }
 
 const Step1: FC<Step1Props> = ({ setStep, methods }) => {
-  console.log(setStep);
   const handleNext = async (): Promise<void> => {
     const isValidNext: boolean = await methods.trigger();
 

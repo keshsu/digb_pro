@@ -1,0 +1,43 @@
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+// translate
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+@mixin translate-x($x) {
+  @include transform(translate-x($x));
+}
+@mixin translate-y($y) {
+  @include transform(translate-y($y));
+}
+
+// rotate
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+//scale
+
+@mixin scale($value) {
+  transform: scale($value);
+}
+
+@mixin scale-x($value) {
+  transform: scaleX($value);
+}
+
+@mixin scale-y($value) {
+  transform: scaleY($value);
+}
+
+//size
+@mixin size($height, $width: $height) {
+	height: $height;
+	width: $width;
+  }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Container } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { alertService } from "services/alertService";
@@ -149,40 +149,37 @@ const TaxProgress: React.FC = () => {
 
   return (
     <>
-      <Card className="custom-card shadow-sm mb-4">
-        <Card.Body className="pb-0">
-          <div className="stepper position-relative d-flex align-items-center justify-content-center">
-            {stepper.map((st, index) => (
-              <div
-                className="stepper-step d-flex align-items-start justify-content-between flex-fill"
-                key={st.id}
-              >
+      <Container>
+        <Card className="custom-card w-100 m-auto mt-5 h-100 shadow-sm mb-4">
+          <Card.Body className="pb-0">
+            <div className="stepper position-relative d-flex align-items-center justify-content-center">
+              {stepper.map((st, index) => (
                 <div
-                  className={`stepper-step-info d-flex align-items-center flex-column position-relative ${
-                    step >= st.id ? "active" : ""
-                  }`}
-                  style={{ color: step >= st.id ? "green" : "" }}
+                  className="stepper-step d-flex flex-column  align-items-start justify-content-between flex-fill"
+                  key={st.id}
                 >
-                  <h3>{st.title}</h3>
-                </div>
-                {stepper.length !== st.id ? (
+                  {stepper.length !== st.id ? (
+                    <div
+                      className={`stepper-dash flex-fill w-100 ${
+                        step >= st.id + 1 ? "active" : ""
+                      }`}
+                    ></div>
+                  ) : (
+                    ""
+                  )}
                   <div
-                    className={`stepper-dash flex-fill w-100 ${
-                      step >= st.id + 1 ? "active" : ""
+                    className={`stepper-step-info pt-4 d-flex align-items-center flex-column position-relative ${
+                      step >= st.id ? "active" : ""
                     }`}
-                    style={{
-                      height: "10px",
-                      margin: "0 -10px",
-                      marginTop: "1.7em",
-                      background: step >= st.id ? "green" : "",
-                    }}
-                  ></div>
-                ) : (
-                  ""
-                )}
-              </div>
-            ))}
-          </div>
+                  >
+                    <h3>{st.title}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card.Body>
+        </Card>
+        <Card className="p-4 w-75 m-auto">
           <div className="university-form-wrapper">
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(submit)}>
@@ -197,8 +194,8 @@ const TaxProgress: React.FC = () => {
               </Form>
             </FormProvider>
           </div>
-        </Card.Body>
-      </Card>
+        </Card>
+      </Container>
     </>
   );
 };

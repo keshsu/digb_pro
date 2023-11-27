@@ -7,11 +7,11 @@ export const authService = {
   getUserToken,
 };
 
-function login(email: string, password: string) {
+function login(username: string, password: string) {
   const requestOptions: RequestInit = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username, password }),
   };
 
   return fetch(`${baseUrl}/login/`, requestOptions)

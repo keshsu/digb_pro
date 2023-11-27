@@ -4,7 +4,7 @@ import { Button, Col, FormLabel, Row } from "react-bootstrap";
 import Input from "../input/Input";
 
 interface Step2Props {
-  setStep: (step: number) => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
   methods: {
     trigger: () => Promise<boolean>;
     setValue: (name: string, value: any) => void;
@@ -61,7 +61,7 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
     methods.setValue("infoDescription", info?.tax_infos);
   };
 
-  const deleteTaxMissingInfoHandler = (id) => {
+  const deleteTaxMissingInfoHandler = (id: string) => {
     const taxt_missing_infosArray = taxt_missing_infos.filter(
       (course: MissingInfos) => course.id !== id
     );
@@ -73,10 +73,10 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
     <div className="university-step">
       <div className="step-divider"></div>
       <h4 className="university-step-label">Missing Infos</h4>
-      {taxt_missing_infos?.map((t_info, index) => (
+      {taxt_missing_infos?.map((t_info: MissingInfos, index) => (
         <div key={index}>
           <div className="singleCourse my-4">
-            <FormLabel>{t_info?.tax_info}</FormLabel>
+            <FormLabel>{t_info?.tax_infos}</FormLabel>
             <div className="course-action-button-wrapper position-absolute">
               <button
                 onClick={() => editTaxMissingInfoHandler(t_info?.id)}
