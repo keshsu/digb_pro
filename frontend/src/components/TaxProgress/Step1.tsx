@@ -16,10 +16,11 @@ interface Step1Props {
 }
 
 const Step1: FC<Step1Props> = ({ setStep, methods }) => {
+  console.log(setStep);
   const handleNext = async (): Promise<void> => {
     const isValidNext: boolean = await methods.trigger();
 
-    isValidNext && setStep((curr: number) => (curr + 1) as number);
+    isValidNext && setStep((curr: number) => curr + 1);
   };
 
   const fieldEntities = [

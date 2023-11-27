@@ -23,8 +23,8 @@ const Input: FC<InputProps> = (props) => {
     label,
     onImageChange,
     isRequired = false,
-    acceptType= "",
-    isMulti = false
+    acceptType = "",
+    isMulti = false,
   } = props;
 
   return (
@@ -48,7 +48,7 @@ const Input: FC<InputProps> = (props) => {
                     placeholder={placeholder}
                     required={isRequired}
                     accept={acceptType}
-                    multiple={isMulti}  {/* Enable multiple file selection */}
+                    multiple={isMulti}
                   />
                   <span className="file-custom"></span>
                 </div>

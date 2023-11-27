@@ -58,7 +58,10 @@ const Step7: FC<Step7Props> = ({ setStep, methods }) => {
         </Row>
       </div>
       <div className="step-action-button my-3 d-flex align-items-center justify-content-between">
-        <Button variant="primary" onClick={() => setStep((curr) => curr - 1)}>
+        <Button
+          variant="primary"
+          onClick={() => setStep((curr: number) => curr - 1)}
+        >
           Back
         </Button>
         <Button

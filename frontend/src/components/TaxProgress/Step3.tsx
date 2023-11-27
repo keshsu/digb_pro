@@ -15,6 +15,11 @@ interface Step2Props {
   };
 }
 
+interface MissingInfos {
+  id: string;
+  tax_infos: string;
+}
+
 const Step2: FC<Step2Props> = ({ setStep, methods }) => {
   const [taxt_missing_infos, setTaxMissingInfos] = useState([]);
   const [addTaxMissingInfo, setAddTaxMissingInfo] = useState(true);
@@ -37,39 +42,29 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
   ];
 
   useEffect(() => {
-    methods.setValue("taxt_missing_infos", taxt_missing_infos);
-    setTaxMissingInfos(true);
+    if (taxt_missing_infos) {
+      methods.setValue("taxt_missing_infos", taxt_missing_infos);
+    }
+    setAddTaxMissingInfo(true);
   }, [taxt_missing_infos]);
 
-  
   const addTaxMissingInfoHandler = () => {
     methods.setValue("tax_info", "");
   };
 
-  const editTaxMissingInfoHandler = (id) => {
-    const course = taxt_missing_infos.filter((course) => course.id === id)[0];
+  const editTaxMissingInfoHandler = (id: string) => {
+    const info: MissingInfos = taxt_missing_infos.filter(
+      (info: MissingInfos) => info.id === id
+    )[0];
 
     setAddTaxMissingInfo(false);
-    setId(id);
-    methods.setValue("courseDescription", course?.description);
-  };
-
-  const updateTaxMissingInfoHandler = () => {
-    let course = taxt_missing_infos.filter((course) => course.id === id)[0];
-
-    course.description = methods.getValues("courseDescription");
-    
-    const taxt_missing_infosArray = taxt_missing_infos.filter((course) => course.id !== id);
-
-    setTaxMissingInfos([...taxt_missing_infosArray, course]);
-    methods.setValue("courseName", "");
-    methods.setValue("courseHandbook", "");
-    methods.setValue("courseDescription", "");
-    methods.setValue("courseStatus", "");
+    methods.setValue("infoDescription", info?.tax_infos);
   };
 
   const deleteTaxMissingInfoHandler = (id) => {
-    const taxt_missing_infosArray = taxt_missing_infos.filter((course) => course.id !== id);
+    const taxt_missing_infosArray = taxt_missing_infos.filter(
+      (course: MissingInfos) => course.id !== id
+    );
 
     setTaxMissingInfos([...taxt_missing_infosArray]);
   };
@@ -84,7 +79,7 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
             <FormLabel>{t_info?.tax_info}</FormLabel>
             <div className="course-action-button-wrapper position-absolute">
               <button
-                onClick={() => editCourseHandler(t_info?.id)}
+                onClick={() => editTaxMissingInfoHandler(t_info?.id)}
                 type="button"
                 className="button small ghost course-action-button"
               >
@@ -92,7 +87,7 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
               </button>
               <button
                 type="button"
-                onClick={() => deleteCourseHandler(t_info?.id)}
+                onClick={() => deleteTaxMissingInfoHandler(t_info?.id)}
                 className="button small ghost course-action-button"
               >
                 Delete
@@ -120,15 +115,17 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
               </Col>
             )
           )}
-          
+
           <div className="my-3 d-flex justify-content-center w-100">
-              <button
-                className="add-course-btn button ghost small w-button w-100"
-                onClick={addTaxMissingInfo ? addTaxMissingInfoHandler : updateTaxMissingInfoHandler}
-              >
-                {addTaxMissingInfo ? "Add TaxMissingInfo" : "Update TaxMissingInfo"}
-              </button>
-            </div>
+            <button
+              className="add-course-btn button ghost small w-button w-100"
+              onClick={addTaxMissingInfoHandler}
+            >
+              {addTaxMissingInfo
+                ? "Add TaxMissingInfo"
+                : "Update TaxMissingInfo"}
+            </button>
+          </div>
         </Row>
       </div>
       <div className="step-action-button my-3 d-flex align-items-center justify-content-between">
