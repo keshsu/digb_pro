@@ -1,15 +1,15 @@
-import { createContext, useEffect, useReducer, ReactNode, Reducer } from 'react';
-import User from 'interface/user';
-import reducer from 'reducers/reducer';
-
-interface State {
-  user: User | null;
-  isFetching: boolean;
-  error: boolean;
-}
+import {
+  createContext,
+  useEffect,
+  useReducer,
+  ReactNode,
+  Reducer,
+} from "react";
+import User from "interface/user";
+import reducer, { State } from "reducers/reducer";
 
 const getInitialUser = (): User | null => {
-  const storedUser = localStorage.getItem('user');
+  const storedUser = localStorage.getItem("user");
   return storedUser ? JSON.parse(storedUser) : null;
 };
 
@@ -25,27 +25,33 @@ interface Action {
 }
 
 interface UserContextProps {
-  user: User | null;
+  user: User | null | string;
   isFetching: boolean;
   error: boolean;
   dispatch: React.Dispatch<Action>;
 }
 
-export const UserContext = createContext<UserContextProps | undefined>(undefined);
+export const UserContext = createContext<UserContextProps | undefined>(
+  undefined
+);
 
 interface UserContextProviderProps {
   children: ReactNode;
 }
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [state, dispatch] = useReducer<Reducer<State, Action>>(reducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer<Reducer<State, Action>>(
+    reducer,
+    INITIAL_STATE
+  );
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(state.user));
+    localStorage.setItem("user", JSON.stringify(state.user));
   }, [state.user]);
 
   return (
-    <UserContext.Provider value={{
+    <UserContext.Provider
+      value={{
         user: state.user,
         isFetching: state.isFetching,
         error: state.error,

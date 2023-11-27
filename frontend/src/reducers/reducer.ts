@@ -1,7 +1,8 @@
+import User from "interface/user";
 import { Reducer } from "react";
 
-interface State {
-  user: null | string;
+export interface State {
+  user: User | null | string;
   isFetching: boolean;
   error: boolean;
 }
