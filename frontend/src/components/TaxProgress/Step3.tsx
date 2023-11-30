@@ -48,10 +48,15 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
     setAddTaxMissingInfo(true);
   }, [taxt_missing_infos]);
 
-  const addTaxMissingInfoHandler = () => {
+  const addTaxMissingInfoHandler = (): void => {
+    const ti: { tax_info: string }[] = [
+      {
+        tax_info: methods.getValues("tax_info"),
+      },
+    ];
+    setTaxMissingInfos(removeDuplicate([...ti, ...taxt_missing_infos]));
     methods.setValue("tax_info", "");
   };
-
   const editTaxMissingInfoHandler = (id: string) => {
     const info: MissingInfos = taxt_missing_infos.filter(
       (info: MissingInfos) => info.id === id
@@ -118,7 +123,7 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
 
           <div className="my-3 d-flex justify-content-center w-100">
             <button
-              className="add-course-btn button ghost small w-button w-100"
+              className="add-course-btn button small w-button w-100"
               onClick={addTaxMissingInfoHandler}
             >
               {addTaxMissingInfo
@@ -145,4 +150,13 @@ const Step2: FC<Step2Props> = ({ setStep, methods }) => {
   );
 };
 
+const removeDuplicate = (arr: { name: string }[]): { name: string }[] => {
+  const names = arr.map((a) => a.name);
+
+  const filtered = arr.filter(
+    ({ name }, index) => !names.includes(name, index + 1)
+  );
+
+  return filtered;
+};
 export default Step2;

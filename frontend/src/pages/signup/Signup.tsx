@@ -21,7 +21,7 @@ const Signup = () => {
   const location = useLocation();
   const [inputs, setInputs] = useState({
     username: "",
-    password: "",
+    password1: "",
     password2: "",
   });
 
@@ -30,12 +30,12 @@ const Signup = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
   const [notMatchError, setNoMatchError] = useState<string>("");
-  const { username, password, password2 } = inputs;
+  const { username, password1, password2 } = inputs;
 
   const { from } = location.state || { from: ROUTES.Index.path };
 
   const setRePassword = (value: string) => {
-    if (value === inputs?.password) {
+    if (value === inputs?.password1) {
       setConfirmPassword(value);
     } else {
       setNoMatchError("Password didn't matched.");
@@ -124,7 +124,7 @@ const Signup = () => {
                       <Form.Control
                         required
                         type={passwordShown ? "text" : "password"}
-                        name="password"
+                        name="password1"
                         placeholder="Password"
                         onChange={handleChange}
                       />
@@ -138,7 +138,7 @@ const Signup = () => {
                       </InputGroup.Text>
                     </InputGroup>
 
-                    {submitted && !password && (
+                    {submitted && !password1 && (
                       <div className="invalid-feedback">
                         Password is required
                       </div>

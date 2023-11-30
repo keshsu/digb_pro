@@ -6,8 +6,8 @@ import { alertService } from "services/alertService";
 import { taxService } from "services/taxService";
 
 import Step1 from "./Step1";
-import Step2 from "./Step5";
-import Step3 from "./Step2";
+import Step2 from "./Step2";
+import Step3 from "./Step3";
 import Step4 from "./Step4";
 import Step5 from "./Step5";
 import Step6 from "./Step6";
@@ -24,10 +24,6 @@ interface TaxMissingInfoProps {
 const TaxProgress: React.FC = () => {
   const methods = useForm({ mode: "all" });
   const [step, setStep] = useState<number>(0);
-
-  const [data, setData] = useState<{ tax: any[] }>({
-    tax: [],
-  });
 
   // formSubmit
   const submit = (data: any) => {
@@ -161,32 +157,21 @@ const TaxProgress: React.FC = () => {
       <Container>
         <Card className="custom-card w-100 m-auto mt-5 h-100 shadow-sm mb-4">
           <Card.Body className="pb-0">
-            <ProgressBar now={progress} className="rounded-3"/>
+            <ProgressBar now={progress} className="rounded-3" />
             <div className="stepper position-relative d-flex align-items-center justify-content-center">
               {stepper.map((st, index) => (
-                <>
-                  {/* {stepper.length !== st.id ? (
-                    <div
-                      className={`stepper-dash flex-fill w-100 ${
-                        step >= st.id + 1 ? "active" : ""
-                      }`}
-                    ></div>
-                  ) : (
-                    ""
-                  )} */}
+                <div
+                  className="stepper-step d-flex flex-column align-items-center justify-content-between flex-fill"
+                  key={st.id}
+                >
                   <div
-                    className="stepper-step d-flex flex-column align-items-center justify-content-between flex-fill"
-                    key={st.id}
+                    className={`stepper-step-info pt-4 d-flex align-items-center flex-column position-relative ${
+                      step >= st.id ? "active" : ""
+                    }`}
                   >
-                    <div
-                      className={`stepper-step-info pt-4 d-flex align-items-center flex-column position-relative ${
-                        step >= st.id ? "active" : ""
-                      }`}
-                    >
-                      <h3>{st.title}</h3>
-                    </div>
+                    <h3>{st.title}</h3>
                   </div>
-                </>
+                </div>
               ))}
             </div>
           </Card.Body>

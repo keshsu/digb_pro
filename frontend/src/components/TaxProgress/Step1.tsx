@@ -26,10 +26,18 @@ const Step1: FC<Step1Props> = ({ setStep, methods }) => {
     {
       type: "text",
       name: "name",
-      placeHolder: "Full Name",
-      label: "Name",
+      placeHolder: "First Name",
+      label: "First Name",
       isRequired: true,
-      fullRow: true,
+      fullRow: false,
+    },
+    {
+      type: "text",
+      name: "surname",
+      placeHolder: "Last Name",
+      label: "Last Name",
+      isRequired: true,
+      fullRow: false,
     },
     {
       type: "email",

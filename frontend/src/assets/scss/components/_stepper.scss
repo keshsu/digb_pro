@@ -21,6 +21,10 @@
 .stepper-step-info {
   z-index: 99;
 
+  &.active{
+    color: $primary-color;
+  }
+
   h3 {
     font-size: $p-font-size;
     font-family: $Roboto-Medium-font-family;
