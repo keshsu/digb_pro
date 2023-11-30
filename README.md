@@ -34,10 +34,12 @@ To run the app (dev. mode)
 
 ```
 cd backend
-node index.js
+python manage.py makemigrations
+python manage.py migrate
+python mange.py runserver
 
-cd app
-npm start
+cd frontend
+yarn start
 ```
 
 ## Built With
@@ -46,3 +48,14 @@ npm start
 * [React Typescript](https://create-react-app.dev/docs/adding-typescript/) - The frontend framework used
 <!-- * [MySql](https://www.mysql.com/) - Database platform used -->
 
+
+## Attaching the db.sqlite for your reference 
+```
+for signin you can also use 
+username: digb, 
+password: Mypass@123
+
+OR
+
+you can register on you own by creating your account
+```

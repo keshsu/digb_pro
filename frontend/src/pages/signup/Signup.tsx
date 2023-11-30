@@ -15,21 +15,32 @@ import Alert from "components/Alert/Alert";
 import { alertService } from "services/alertService";
 import { authService } from "services/authService";
 import { ROUTES } from "constants/routes";
-import { Link, useLocation } from "react-router-dom";
-import { history } from "utils/history";
+import { useLocation } from "react-router-dom";
 
-const Signin = () => {
+const Signup = () => {
   const location = useLocation();
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
+    password2: "",
   });
 
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
-  const { username, password } = inputs;
+  const [showRePassword, setShowRePassword] = useState(false);
+  const [notMatchError, setNoMatchError] = useState<string>("");
+  const { username, password, password2 } = inputs;
 
   const { from } = location.state || { from: ROUTES.Index.path };
+
+  const setRePassword = (value: string) => {
+    if (value === inputs?.password) {
+      setConfirmPassword(value);
+    } else {
+      setNoMatchError("Password didn't matched.");
+    }
+  };
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -43,27 +54,24 @@ const Signin = () => {
     setSubmitted(true);
 
     authService
-      .login(username, password)
-      .then((user: any) => {
-        if (user.key) {
-          localStorage.clear();
-          localStorage.setItem("token", user.key);
-          alertService.success("Login Successfully", {
-            keepAfterRouteChange: true,
-            autoClose: true,
-          });
-          window.location.href = from;
-        } else {
-          // setInputs("");
-          localStorage.clear();
-        }
+      .register({
+        ...inputs,
       })
-      .catch(() => {
-        alertService.error("Invalid Email or Password", {
+      .then((res) => {
+        alertService.success(res.detail, {
           keepAfterRouteChange: true,
           autoClose: true,
         });
-      });
+        setSubmitted(false);
+        window.location.href = from;
+      })
+      .catch((err) => {
+        alertService.error(err, {
+          keepAfterRouteChange: true,
+          autoClose: true,
+        });
+        setSubmitted(false);
+      }); 
   }
 
   const togglePasswordVisiblity = () => {
@@ -76,11 +84,9 @@ const Signin = () => {
         className="signin-wrapper d-flex align-items-center"
         style={{
           height: "100vh",
-
           backgroundImage: `url('https://png.pngtree.com/png-vector/20220610/ourmid/pngtree-tax-form-of-state-government-taxation-with-forms-png-image_4966178.png'), url('https://www.w3schools.com/images/background_in_space.gif')`,
           backgroundRepeat: "no-repeat, repeat",
           backgroundPosition: "right bottom, center center",
-          // backgroundSize: "100%, 100%",
         }}
       >
         <Container>
@@ -91,7 +97,7 @@ const Signin = () => {
             >
               <Card className="custom-card signin-card rounded p-4 p-lg-5 w-100 fmxw-500">
                 <div className="text-center text-md-center mb-4 mt-md-0">
-                  <h1 className="mb-3">Sign in to</h1>
+                  <h1 className="mb-3">Sign Up to</h1>
                   <h3>Digb Taxation Process</h3>
                 </div>
                 <Form className="mt-4" onSubmit={handleSubmit}>
@@ -138,34 +144,38 @@ const Signin = () => {
                       </div>
                     )}
                   </Form.Group>
-                  <Form.Group>
-                    <div className="d-flex justify-content-between align-items-center mb-4">
-                      <Form.Check type="checkbox">
-                        <FormCheck.Input id="defaultCheck5" className="me-2" />
-                        <FormCheck.Label
-                          htmlFor="defaultCheck5"
-                          className="mb-0"
+                  <Form.Group id="password2" className="mb-4">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        required
+                        type={showRePassword ? "text" : "password"}
+                        name="password2"
+                        placeholder="Confirm Password"
+                        onChange={handleChange}
+                      />
+                      <InputGroup.Text>
+                        <Button
+                          disabled={showRePassword}
+                          onClick={() => setShowRePassword(!showRePassword)}
                         >
-                          Remember me
-                        </FormCheck.Label>
-                      </Form.Check>
-                    </div>
+                          Show
+                        </Button>
+                      </InputGroup.Text>
+                    </InputGroup>
+
+                    {submitted && !password2 && (
+                      <div className="invalid-feedback">
+                        Password is required
+                      </div>
+                    )}
                   </Form.Group>
                   <button
                     type="submit"
                     className="button small cursor-pointer w-100"
                   >
-                    Sign in
+                    Create account
                   </button>
-                  <p className="text-center my-2">
-                    Don't have an account?
-                    <Link
-                      to={ROUTES.Register.path}
-                      className="ms-2 text-primary cursor-pointer"
-                    >
-                      Register
-                    </Link>
-                  </p>
                 </Form>
               </Card>
             </Col>
@@ -176,4 +186,4 @@ const Signin = () => {
     </main>
   );
 };
-export default Signin;
+export default Signup;

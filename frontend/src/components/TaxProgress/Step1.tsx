@@ -52,7 +52,7 @@ const Step1: FC<Step1Props> = ({ setStep, methods }) => {
   return (
     <div className="university-step">
       <div className="step-divider"></div>
-      <h4 className="university-step-label">Account Setup</h4>
+      <h4 className="university-step-label">Account Info</h4>
       <div className="fields">
         <Row>
           {fieldEntities.map(

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Form, Container } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Form, Container, ProgressBar } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { alertService } from "services/alertService";
@@ -23,7 +23,7 @@ interface TaxMissingInfoProps {
 
 const TaxProgress: React.FC = () => {
   const methods = useForm({ mode: "all" });
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(0);
 
   const [data, setData] = useState<{ tax: any[] }>({
     tax: [],
@@ -147,18 +147,25 @@ const TaxProgress: React.FC = () => {
     },
   ];
 
+  const [progress, setProgress] = useState<number>(0);
+  const progressPercent: number = 100 / stepper.length;
+
+  useEffect(() => {
+    if (step) {
+      setProgress((curr) => curr + progressPercent);
+    }
+  }, [step, progressPercent]);
+
   return (
     <>
       <Container>
         <Card className="custom-card w-100 m-auto mt-5 h-100 shadow-sm mb-4">
           <Card.Body className="pb-0">
+            <ProgressBar now={progress} className="rounded-3"/>
             <div className="stepper position-relative d-flex align-items-center justify-content-center">
               {stepper.map((st, index) => (
-                <div
-                  className="stepper-step d-flex flex-column  align-items-start justify-content-between flex-fill"
-                  key={st.id}
-                >
-                  {stepper.length !== st.id ? (
+                <>
+                  {/* {stepper.length !== st.id ? (
                     <div
                       className={`stepper-dash flex-fill w-100 ${
                         step >= st.id + 1 ? "active" : ""
@@ -166,15 +173,20 @@ const TaxProgress: React.FC = () => {
                     ></div>
                   ) : (
                     ""
-                  )}
+                  )} */}
                   <div
-                    className={`stepper-step-info pt-4 d-flex align-items-center flex-column position-relative ${
-                      step >= st.id ? "active" : ""
-                    }`}
+                    className="stepper-step d-flex flex-column align-items-center justify-content-between flex-fill"
+                    key={st.id}
                   >
-                    <h3>{st.title}</h3>
+                    <div
+                      className={`stepper-step-info pt-4 d-flex align-items-center flex-column position-relative ${
+                        step >= st.id ? "active" : ""
+                      }`}
+                    >
+                      <h3>{st.title}</h3>
+                    </div>
                   </div>
-                </div>
+                </>
               ))}
             </div>
           </Card.Body>
@@ -183,14 +195,14 @@ const TaxProgress: React.FC = () => {
           <div className="university-form-wrapper">
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(submit)}>
-                {step === 1 && <Step1 setStep={setStep} methods={methods} />}
-                {step === 2 && <Step2 setStep={setStep} methods={methods} />}
-                {step === 3 && <Step3 setStep={setStep} methods={methods} />}
-                {step === 4 && <Step4 setStep={setStep} methods={methods} />}
-                {step === 5 && <Step5 setStep={setStep} methods={methods} />}
-                {step === 6 && <Step6 setStep={setStep} methods={methods} />}
-                {step === 7 && <Step7 setStep={setStep} methods={methods} />}
-                {step === 8 && <Step8 setStep={setStep} methods={methods} />}
+                {step === 0 && <Step1 setStep={setStep} methods={methods} />}
+                {step === 1 && <Step2 setStep={setStep} methods={methods} />}
+                {step === 2 && <Step3 setStep={setStep} methods={methods} />}
+                {step === 3 && <Step4 setStep={setStep} methods={methods} />}
+                {step === 4 && <Step5 setStep={setStep} methods={methods} />}
+                {step === 5 && <Step6 setStep={setStep} methods={methods} />}
+                {step === 6 && <Step7 setStep={setStep} methods={methods} />}
+                {step === 7 && <Step8 setStep={setStep} methods={methods} />}
               </Form>
             </FormProvider>
           </div>

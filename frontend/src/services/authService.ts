@@ -5,7 +5,20 @@ export const authService = {
   login,
   logout,
   getUserToken,
+  register,
 };
+
+function register(user: object) {
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  };
+
+  return fetch(`${baseUrl}/registration/`, requestOptions)
+    .then(handleResponse)
+    .then((res) => res);
+}
 
 function login(username: string, password: string) {
   const requestOptions: RequestInit = {

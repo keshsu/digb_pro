@@ -41,6 +41,10 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'rest_framework',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',    
     'corsheaders',
 
     # local app
@@ -77,6 +81,13 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+# Django All Auth config. Add all of this.
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 WSGI_APPLICATION = 'digb_core.wsgi.application'

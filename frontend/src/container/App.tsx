@@ -6,6 +6,7 @@ import TaxProgress from "components/TaxProgress";
 import PrivateRoutes from "lib/ProtectedRoute";
 import { ROUTES } from "constants/routes";
 import Signin from "pages/signin/Signin";
+import Signup from "pages/signup/Signup";
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 
             {/* Use the extended CustomRouteProps for the Route element */}
             <Route path={ROUTES.Auth.path} element={<Signin />} />
+            <Route path={ROUTES.Register.path} element={<Signup />} />
           </Routes>
         </Router>
       </HomeContextContainer>

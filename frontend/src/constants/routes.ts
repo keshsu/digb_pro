@@ -1,6 +1,7 @@
 export const ROUTES = {
   Index: { path: "/" } as const,
   Auth: { path: "/signin" } as const,
+  Register: { path: "/signup" } as const,
   NotFound: { path: "/404" } as const,
   TaxProgress: { path: "/tax-progress" } as const,
 };

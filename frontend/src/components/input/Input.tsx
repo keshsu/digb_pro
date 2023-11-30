@@ -86,11 +86,15 @@ const Input: FC<InputProps> = (props) => {
             ) : type === "description" ? (
               <>
                 <Form.Label className="w-100">{label}</Form.Label>
-                <div className="form-control p-0 overflow-hidden">
-                  <textarea id="inputText" onChange={onChange} name={name}>
-                    {value}
-                  </textarea>
-                </div>
+                <textarea
+                  id="inputText"
+                  onChange={onChange}
+                  name={name}
+                  className="form-control p-0 overflow-hidden"
+                  rows={6}
+                >
+                  {value}
+                </textarea>
               </>
             ) : (
               <>
