@@ -6,9 +6,9 @@ Simple blog created using React.js & Node.js
 
 Make sure you have these installed on your machine
 
-* [Node.js](https://nodejs.org/en/download/)
-* [Python](https://www.python.org/about/gettingstarted/)
-* **npm**, **python** This comes with Node.js, but make sure you check if you have it anyway
+- [Node.js](https://nodejs.org/en/download/)
+- [Python](https://www.python.org/about/gettingstarted/)
+- **npm**, **python** This comes with Node.js, but make sure you check if you have it anyway
 
 ### Installing packages
 
@@ -17,7 +17,7 @@ Install backend packages
 ```
 cd backend/
 python -m venv env
-activate 
+activate
 pip install -r packages.txt
 ```
 
@@ -42,20 +42,20 @@ cd frontend
 yarn start
 ```
 
-## Built With
+## Attaching the db.sqlite for your reference
 
-* [Django Rest Framework](https://www.django-rest-framework.org/tutorial/quickstart/) - The backend framework used
-* [React Typescript](https://create-react-app.dev/docs/adding-typescript/) - The frontend framework used
-<!-- * [MySql](https://www.mysql.com/) - Database platform used -->
-
-
-## Attaching the db.sqlite for your reference 
 ```
-for signin you can also use 
-username: digb, 
+for signin you can also use
+username: digb,
 password: Mypass@123
 
 OR
 
 you can register on you own by creating your account
 ```
+
+## Built With
+
+- [Django Rest Framework](https://www.django-rest-framework.org/tutorial/quickstart/) - The backend framework used
+- [React Typescript](https://create-react-app.dev/docs/adding-typescript/) - The frontend framework used
+<!-- * [MySql](https://www.mysql.com/) - Database platform used -->
